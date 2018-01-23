@@ -1,0 +1,20 @@
+# Spawn AWS EC2 and install Openshift
+---
+- hosts: localhost
+  connection: local
+  remote_user: vagrant
+  become: yes
+  gather_facts: false
+  vars_files:
+  - files/awscreds.yml
+  tasks:
+  - name: provision ec2 instance
+    ec2: 
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}" 
+      image: ami-0cfcdb69
+      instance_type: t2.micro 
+      region: "{{ aws_region }}"
+      key_name: aws_ec2_key
+      group: ansible-sg
+      count: 1

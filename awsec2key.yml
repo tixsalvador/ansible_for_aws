@@ -1,0 +1,17 @@
+--- # EC2_KEY MODULE
+- hosts: local
+  connection: local
+  remote_user: vagrant
+  become: yes
+  gather_facts: no
+  vars_files:
+  - files/awscreds.yml
+  tasks:
+  - name: Create new Key Pair
+    ec2_key: 
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key:  "{{ aws_key }}"
+      name: MyKeyPairTest
+      region: "{{ aws_region }}"
+      state: present
+      
