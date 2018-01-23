@@ -17,4 +17,6 @@
       region: "{{ aws_region }}"
       key_name: aws_ec2_key
       group: ansible-sg
+      instance_tags:
+        dk: docker
       count: 1
