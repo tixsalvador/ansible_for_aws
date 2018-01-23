@@ -1,3 +1,4 @@
 .gitignore
 *.retry
+awscreds.yml 
 files/awscreds.yml
