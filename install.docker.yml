@@ -1,6 +1,6 @@
 --- # Docker Install
 
-- hosts: aws 
+- hosts: aws
   remote_user: "{{ docker_user }}"
   become: yes
   vars_files:

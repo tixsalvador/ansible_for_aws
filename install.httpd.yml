@@ -1,0 +1,13 @@
+--- # Install Httpd
+
+- hosts: aws
+  remote_user: "{{ aws_user }}"
+  become: yes
+  vars_files:
+  - files/awscreds.yml
+  tasks:
+    - name: install httpd
+      yum: pkg=httpd state=present update_cache=yes 
+    - name: enable/start httpd
+      service: name=httpd state=started enabled=yes
+   
