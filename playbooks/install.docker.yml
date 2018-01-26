@@ -30,7 +30,7 @@
 
   - name: add docker user to docker group
     user:
-      name: "{{ docker_user }}"
+      name: "{{ aws_user }}"
       groups: docker
 
   - name: start/enable docker
