@@ -9,7 +9,7 @@
   vars_files:
   - files/awscreds.yml
   tasks:
-    - pause: seconds=30
+    - pause: name="waiting for instance to boot" seconds=60
     - name: gathering remote facts
       ec2_instance_facts:
         aws_access_key: "{{ aws_id }}"
@@ -31,6 +31,5 @@
     - name: add new dns name
       lineinfile:
         path: /home/vagrant/virtualpy/aws-openshift/hosts
-    #    regexp: '^\[aws\]'
         insertafter: '^\[aws\]'
         line: "{{ aws_domain_name }}"

@@ -17,6 +17,10 @@
       region: "{{ aws_region }}"
       key_name: aws_ec2_key
       group: ansible-sg
+      volumes:
+        - device_name: /dev/sda1
+          volume_size: 10
+          delete_on_termination: true
       instance_tags:
         dk: docker
       count: 1

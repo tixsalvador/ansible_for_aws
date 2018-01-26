@@ -1,5 +1,5 @@
 --- # Master Playbook
 
-- include: create_ec2.yml
-- include: gather_facts_ec2.yml
-- include: install.httpd.yml
+- include: playbooks/create_ec2.yml
+- include: playbooks/gather_facts_ec2.yml
+- include: playbooks/install.httpd.yml

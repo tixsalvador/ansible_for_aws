@@ -1,7 +1,7 @@
 --- # Docker Install
 
 - hosts: aws
-  remote_user: "{{ docker_user }}"
+  remote_user: "{{ aws_user }}"
   become: yes
   vars_files:
   - files/awscreds.yml 
