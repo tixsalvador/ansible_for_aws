@@ -15,13 +15,24 @@
       - docker-engine
       - docker-engine-selinux
 
-  - name: install additional repos
+  - name: install docker-repo
+    template:
+      src: files/docker.repo.j2
+      dest: /etc/yum.repos.d/docker.repo
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: install epel repos
     yum: pkg={{ item }} state=present
     with_items:
       - epel-release
 
-  - name: install docker
-    yum: pkg=docker state=present update_cache=yes
+  - name: update all packages
+    yum: pkg=* state=latest
+
+  - name: install docker-engine
+    yum: pkg=docker-engine state=present update_cache=yes
 
   - name: create docker group
     group:
