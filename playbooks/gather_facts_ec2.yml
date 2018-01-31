@@ -24,13 +24,13 @@
 
     - name: remove old dns name
       lineinfile:
-        path: /home/vagrant/virtualpy/aws-openshift/hosts 
+        path: /home/vagrant/virtualpy/aws/hosts 
         regexp: '^.*?\.compute.amazonaws\..*$'
         state: absent
 
     - name: add new dns name
       lineinfile:
-        path: /home/vagrant/virtualpy/aws-openshift/hosts
+        path: /home/vagrant/virtualpy/aws/hosts
         insertafter: '^\[aws\]'
         line: "{{ aws_domain_name }}"
 
