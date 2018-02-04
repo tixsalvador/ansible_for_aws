@@ -28,9 +28,6 @@
     with_items:
       - epel-release
 
-  - name: update all packages
-    yum: pkg=* state=latest
-
   - name: install docker-engine
     yum: pkg=docker-engine state=present update_cache=yes
 

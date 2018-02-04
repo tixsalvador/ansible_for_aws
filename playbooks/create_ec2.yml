@@ -13,7 +13,6 @@
       aws_access_key: "{{ aws_id }}"
       aws_secret_key: "{{ aws_key }}" 
       image: ami-0cfcdb69
-      #image: ami-e6301b83
       instance_type: t2.micro 
       region: "{{ aws_region }}"
       key_name: aws_ec2_key
@@ -25,3 +24,26 @@
       instance_tags:
         dk: docker
       count: 1
+    register: ec2
+
+  - name: wait for ssh to come up
+    wait_for:
+      host: "{{ ec2.instances[0].public_dns_name }}" 
+      delay: 30
+      port: 22
+      timeout: 60
+      state: started
+
+  - name: remove old host entry
+    lineinfile:
+      path: /home/vagrant/virtualpy/aws/hosts
+      state: absent
+      regexp: '^.*?\.compute.amazonaws\..*$' 
+
+  - name: add new instance public ip
+    lineinfile:
+      path: /home/vagrant/virtualpy/aws/hosts
+      insertafter: '^\[aws\]'
+      line: "{{ ec2.instances[0].public_dns_name }}" 
+
+  - meta: refresh_inventory

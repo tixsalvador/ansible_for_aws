@@ -1,5 +1,4 @@
 --- # Master Playbook
 
 - include: playbooks/create_ec2.yml
-- include: playbooks/gather_facts_ec2.yml
-- include: playbooks/install.docker.yml
+- include: playbooks/install.docker-ce.yml
