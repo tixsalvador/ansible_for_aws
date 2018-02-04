@@ -5,6 +5,8 @@
   remote_user: vagrant
   become: yes
   gather_facts: false
+  vars:
+    instance_name: docker
   vars_files:
   - files/awscreds.yml
   tasks:
@@ -22,8 +24,9 @@
           volume_size: 10
           delete_on_termination: true
       instance_tags:
-        dk: docker
+        Name: "{{ instance_name }}"
       count: 1
+      state: present
     register: ec2
 
   - name: wait for ssh to come up
